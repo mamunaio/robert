@@ -712,41 +712,39 @@
         <!-- Proof Side: Strategic Field Blueprint & Cabling Standards -->
         <div class="lg:col-span-6">
           <div class="glass-box rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/15 space-y-5 shadow-xl">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
-              <span class="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Field Installation Blueprint</span>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-blue-500/20 text-blue-600 dark:text-blue-400">Carindale Residence Plan</span>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-white/10 pb-3">
+              <div>
+                <span class="font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Installation Proof &amp; Standards</span>
+                <span class="text-sm font-black text-slate-900 dark:text-white">Carindale Security Architecture</span>
+              </div>
+              <!-- Tab switcher -->
+              <div class="inline-flex p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-white/10 text-xs">
+                <button type="button" onclick="setProofTab('blueprint')" id="tab-btn-blueprint" class="px-3 py-1.5 rounded-lg font-bold bg-blue-600 text-white shadow-sm transition-all">
+                  📐 Camera Plan
+                </button>
+                <button type="button" onclick="setProofTab('rack')" id="tab-btn-rack" class="px-3 py-1.5 rounded-lg font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                  🔌 Tidy Cabling
+                </button>
+              </div>
             </div>
 
-            <!-- Floor Plan Graphic Diagram -->
-            <div class="rounded-2xl bg-slate-950 p-5 text-white relative overflow-hidden border border-slate-800">
-              <div class="text-center text-xs font-mono text-cyan-400 mb-3">// 4-POINT OPTIMAL PERIMETER COVERAGE</div>
-              
-              <!-- House Plan Schematic -->
-              <div class="aspect-[4/3] rounded-xl border border-dashed border-slate-700 relative bg-slate-900/90 p-4 flex flex-col justify-between">
-                <!-- Top Cones -->
-                <div class="flex justify-between items-start">
-                  <div class="p-2.5 rounded-xl bg-blue-900/80 border border-blue-400/80 text-[11px] font-mono shadow-md">
-                    📹 CAM 01: Driveway (110° FOV)
-                  </div>
-                  <div class="p-2.5 rounded-xl bg-blue-900/80 border border-blue-400/80 text-[11px] font-mono shadow-md">
-                    📹 CAM 02: Front Entry
-                  </div>
+            <!-- Visual Display Container -->
+            <div class="rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl relative group">
+              <!-- Blueprint Image -->
+              <div id="proof-view-blueprint" class="aspect-[4/3] relative overflow-hidden bg-slate-950 flex items-center justify-center">
+                <img src="cctv-blueprint-plan.jpg" alt="Annotated CCTV camera-position floor plan and cabling routes" class="w-full h-full object-cover sm:object-contain transition-transform duration-500 group-hover:scale-105">
+                <div class="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 flex items-center justify-between text-[11px] font-mono text-cyan-300">
+                  <span>// 4-POINT PERIMETER COVERAGE CONES</span>
+                  <span class="text-amber-400 font-bold">CONCEALED CAT6</span>
                 </div>
+              </div>
 
-                <!-- Central Structure -->
-                <div class="my-auto py-6 px-4 rounded-xl bg-slate-800/90 border border-slate-700 text-center font-bold text-xs text-slate-200 shadow-inner">
-                  MAIN PROPERTY STRUCTURE<br>
-                  <span class="text-[10px] text-emerald-400 font-mono font-normal">Internal Roof Cavity Concealed Cat6 &rarr; Central NVR Cabinet</span>
-                </div>
-
-                <!-- Bottom Cones -->
-                <div class="flex justify-between items-end">
-                  <div class="p-2.5 rounded-xl bg-blue-900/80 border border-blue-400/80 text-[11px] font-mono shadow-md">
-                    📹 CAM 03: Side Gate
-                  </div>
-                  <div class="p-2.5 rounded-xl bg-blue-900/80 border border-blue-400/80 text-[11px] font-mono shadow-md">
-                    📹 CAM 04: Rear Patio
-                  </div>
+              <!-- Tidy Cabling Rack Image -->
+              <div id="proof-view-rack" class="aspect-[4/3] relative overflow-hidden bg-slate-950 hidden items-center justify-center">
+                <img src="cctv-tidy-rack.jpg" alt="Professional tidy NVR data rack installation with zero messy cabling" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <div class="absolute bottom-2 left-2 right-2 bg-slate-950/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 flex items-center justify-between text-[11px] font-mono text-emerald-300">
+                  <span>// WALL-MOUNT NVR RACK TERMINATION</span>
+                  <span class="text-cyan-400 font-bold">CLEAN TRADES FINISH</span>
                 </div>
               </div>
             </div>
@@ -2071,6 +2069,26 @@
       try {
         localStorage.setItem('cctv-theme', isDark ? 'dark' : 'light');
       } catch (e) {}
+    }
+
+    // Installation Proof Tab Switcher
+    function setProofTab(tab) {
+      const viewBlueprint = document.getElementById('proof-view-blueprint');
+      const viewRack = document.getElementById('proof-view-rack');
+      const btnBlueprint = document.getElementById('tab-btn-blueprint');
+      const btnRack = document.getElementById('tab-btn-rack');
+
+      if (tab === 'blueprint') {
+        if (viewBlueprint) { viewBlueprint.classList.remove('hidden'); viewBlueprint.classList.add('flex'); }
+        if (viewRack) { viewRack.classList.add('hidden'); viewRack.classList.remove('flex'); }
+        if (btnBlueprint) btnBlueprint.className = 'px-3 py-1.5 rounded-lg font-bold bg-blue-600 text-white shadow-sm transition-all';
+        if (btnRack) btnRack.className = 'px-3 py-1.5 rounded-lg font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
+      } else {
+        if (viewRack) { viewRack.classList.remove('hidden'); viewRack.classList.add('flex'); }
+        if (viewBlueprint) { viewBlueprint.classList.add('hidden'); viewBlueprint.classList.remove('flex'); }
+        if (btnRack) btnRack.className = 'px-3 py-1.5 rounded-lg font-bold bg-blue-600 text-white shadow-sm transition-all';
+        if (btnBlueprint) btnBlueprint.className = 'px-3 py-1.5 rounded-lg font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
+      }
     }
 
     // Mobile Menu Toggle
