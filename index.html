@@ -227,12 +227,6 @@
             <svg class="theme-icon-sun w-4 h-4 hidden dark:inline text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
           </button>
 
-          <!-- SEO Pillar Architecture Modal Trigger (from wireframe sidebar) -->
-          <button onclick="openArchitectureModal()" class="hidden xl:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-300 dark:border-white/15 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" title="View Wireframe Pillar Architecture">
-            <svg class="w-3.5 h-3.5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            <span>Pillars</span>
-          </button>
-
           <!-- Primary CTA -->
           <a href="#quote" class="px-4 xl:px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-black uppercase tracking-wider shadow-lg shadow-blue-600/30 transition-all hidden sm:inline-flex items-center gap-2 transform hover:-translate-y-0.5 whitespace-nowrap">
             Request a Quote
@@ -1912,7 +1906,6 @@
             <li><a href="#projects" class="hover:text-white transition-colors">Recent Sunnybank Projects</a></li>
             <li><a href="#why-choose-us" class="hover:text-white transition-colors">Licences &amp; Insurance</a></li>
             <li><a href="#faqs" class="hover:text-white transition-colors">CCTV Installation FAQs</a></li>
-            <li><button onclick="openArchitectureModal()" class="text-cyan-400 hover:underline text-left">Pillar-Page Architecture &rarr;</button></li>
           </ul>
         </div>
 
@@ -1955,69 +1948,6 @@
     <a href="#quote" class="flex-1 py-3.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-xs flex items-center justify-center gap-1 shadow-md transition-all">
       Request Quote
     </a>
-  </div>
-
-  <!-- PILLAR-PAGE ARCHITECTURE MODAL (FROM WIREFRAME SIDEBAR) -->
-  <div id="architecture-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
-    <div class="glass-box w-full max-w-2xl rounded-3xl border-2 border-slate-200 dark:border-white/20 shadow-2xl p-6 sm:p-8 relative my-8 bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-      
-      <button onclick="closeArchitectureModal()" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-white transition-colors" aria-label="Close">
-        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-
-      <div class="mb-6 pr-8">
-        <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Wireframe Blueprint Reference</span>
-        <h3 class="text-2xl font-black mt-1">Pillar-Page Architecture &amp; SEO Strategy</h3>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">As defined in the cctv-sunnybank-wireframe.html sidebar.</p>
-      </div>
-
-      <div class="space-y-4 text-xs max-h-[60vh] overflow-y-auto pr-2">
-        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-white/10">
-          <strong class="text-blue-600 dark:text-blue-400 font-black">Recommended SEO Focus:</strong>
-          <p class="mt-1 text-slate-600 dark:text-slate-300"><strong>Homepage intent:</strong> CCTV and security camera installation in Sunnybank.</p>
-          <p class="text-slate-600 dark:text-slate-300"><strong>H1:</strong> CCTV &amp; Security Camera Installation in Sunnybank</p>
-          <p class="text-slate-600 dark:text-slate-300"><strong>Primary CTA:</strong> Request a CCTV Quote</p>
-        </div>
-
-        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-white/10">
-          <strong class="text-slate-900 dark:text-white font-black">6 Primary Pillar Pages (Target Search Intents):</strong>
-          <ol class="list-decimal pl-5 mt-2 space-y-1 text-slate-600 dark:text-slate-300">
-            <li><strong>Homepage:</strong> CCTV Installation Sunnybank</li>
-            <li>Home Security Cameras Sunnybank</li>
-            <li>Commercial CCTV Sunnybank</li>
-            <li>Hikvision &amp; Dahua Installers Sunnybank</li>
-            <li>Security Camera Repairs Sunnybank</li>
-            <li>Wireless vs Wired CCTV Sunnybank</li>
-          </ol>
-        </div>
-
-        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-white/10">
-          <strong class="text-slate-900 dark:text-white font-black">Full Site Architecture &amp; Sub-Topics:</strong>
-          <ul class="list-disc pl-5 mt-2 space-y-1 text-slate-600 dark:text-slate-300">
-            <li><strong>1. CCTV Installation:</strong> Home CCTV, Business CCTV, BYO Installation, New Builds and Renovations.</li>
-            <li><strong>2. Repairs and Upgrades:</strong> CCTV Repairs, Analogue to IP Upgrades, NVR and Hard Drive Problems, Remote Viewing and App Problems.</li>
-            <li><strong>3. Systems Guide:</strong> Wired vs Wireless, NVR vs DVR, Camera Resolution, Night Vision, Active Deterrence, Storage and Cybersecurity.</li>
-            <li><strong>4. CCTV Pricing:</strong> Packages, Installation Cost Factors, Inclusions and Warranty.</li>
-            <li><strong>5. Commercial CCTV:</strong> Retail and Hospitality, Offices, Warehouses, Property Managers and Strata.</li>
-            <li><strong>6. Service Areas:</strong> Sunnybank Hills, Robertson, MacGregor, Runcorn, Eight Mile Plains, Calamvale and nearby suburbs.</li>
-          </ul>
-        </div>
-
-        <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-white/10">
-          <strong class="text-emerald-600 dark:text-emerald-400 font-black">Launch Checks Checklist:</strong>
-          <p class="mt-1 text-slate-600 dark:text-slate-300">
-            ✓ Homepage returns HTTP 200 • HTTPS works • Mobile layout is tested • One canonical URL is used • XML sitemap is submitted • Quote form is tested • All trust claims are verified.
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-6 pt-4 border-t border-slate-200 dark:border-white/10 flex justify-end">
-        <button onclick="closeArchitectureModal()" class="px-6 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-md">
-          Close Window
-        </button>
-      </div>
-
-    </div>
   </div>
 
   <!-- STANDALONE PURE JAVASCRIPT LOGIC -->
@@ -2228,25 +2158,6 @@
     function toggleMobileMenu() {
       document.getElementById('mobile-menu')?.classList.toggle('hidden');
     }
-
-    // Pillar Architecture Modal
-    function openArchitectureModal() {
-      document.getElementById('architecture-modal')?.classList.remove('hidden');
-      document.getElementById('architecture-modal')?.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeArchitectureModal() {
-      document.getElementById('architecture-modal')?.classList.add('hidden');
-      document.getElementById('architecture-modal')?.classList.remove('flex');
-      document.body.style.overflow = '';
-    }
-
-    // Escape Key Listener
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeArchitectureModal();
-      }
-    });
   </script>
 
 </body>
