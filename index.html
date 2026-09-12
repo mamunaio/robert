@@ -1023,60 +1023,6 @@
 
       </div>
 
-      <!-- Interactive Package Estimator Widget (CRO Power Tool) -->
-      <div class="mt-14 glass-box p-7 sm:p-9 rounded-3xl border border-slate-200 dark:border-white/15 max-w-4xl mx-auto shadow-xl">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-5 mb-6">
-          <div>
-            <span class="text-[11px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">Interactive Calculator</span>
-            <h3 class="text-xl font-black text-slate-900 dark:text-white mt-1">Customize Your CCTV Setup</h3>
-          </div>
-          <div class="text-right">
-            <span class="text-xs text-slate-500 dark:text-slate-400 block font-bold">Estimated Turnkey Cost:</span>
-            <span id="calc-display-price" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400">$1,390 inc. GST</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs">
-          <!-- Option 1: Cameras -->
-          <div class="space-y-2">
-            <label class="block font-bold text-slate-700 dark:text-slate-300">1. Number of 4K Cameras:</label>
-            <div class="grid grid-cols-4 gap-1.5" id="calc-cam-btns">
-              <button type="button" onclick="setCalcCam(2, this)" class="calc-cam-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent">2</button>
-              <button type="button" onclick="setCalcCam(4, this)" class="calc-cam-btn py-2 rounded-xl bg-blue-600 text-white font-black border-2 border-blue-500 shadow-md">4</button>
-              <button type="button" onclick="setCalcCam(6, this)" class="calc-cam-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent">6</button>
-              <button type="button" onclick="setCalcCam(8, this)" class="calc-cam-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent">8</button>
-            </div>
-          </div>
-
-          <!-- Option 2: Storage -->
-          <div class="space-y-2">
-            <label class="block font-bold text-slate-700 dark:text-slate-300">2. Hard Drive Capacity:</label>
-            <div class="grid grid-cols-3 gap-1.5" id="calc-hdd-btns">
-              <button type="button" onclick="setCalcHdd(2, this)" class="calc-hdd-btn py-2 rounded-xl bg-blue-600 text-white font-black border-2 border-blue-500 shadow-md">2TB (21d)</button>
-              <button type="button" onclick="setCalcHdd(4, this)" class="calc-hdd-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent">4TB (45d)</button>
-              <button type="button" onclick="setCalcHdd(8, this)" class="calc-hdd-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent">8TB (90d)</button>
-            </div>
-          </div>
-
-          <!-- Option 3: Storeys -->
-          <div class="space-y-2">
-            <label class="block font-bold text-slate-700 dark:text-slate-300">3. Property Storey:</label>
-            <div class="grid grid-cols-2 gap-1.5" id="calc-storey-btns">
-              <button type="button" onclick="setCalcStorey(1, this)" class="calc-storey-btn py-2 rounded-xl bg-blue-600 text-white font-black border-2 border-blue-500 shadow-md">Single</button>
-              <button type="button" onclick="setCalcStorey(2, this)" class="calc-storey-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent">Double</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-6 pt-5 border-t border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="text-xs text-slate-500 dark:text-slate-400">
-            Includes professional installation, concealed cabling &amp; full mobile app configuration.
-          </div>
-          <button onclick="bookCalculatedPackage()" class="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-blue-600/30 transition-all">
-            Lock In This Package Estimate &rarr;
-          </button>
-        </div>
-      </div>
 
       <!-- Pricing Assumptions Banner (Direct from wireframe) -->
       <div class="mt-8 p-4 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-300 text-center max-w-4xl mx-auto leading-relaxed">
@@ -2021,63 +1967,6 @@
         btnNight.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-600 text-white transition-all';
         btnDay.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition-all';
       }
-    }
-
-    // Interactive Custom Package Calculator Logic
-    let calcState = {
-      cameras: 4,
-      hdd: 2,
-      storey: 1
-    };
-
-    function setCalcCam(count, btn) {
-      calcState.cameras = count;
-      document.querySelectorAll('#calc-cam-btns button').forEach(b => {
-        b.className = 'calc-cam-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent';
-      });
-      btn.className = 'calc-cam-btn py-2 rounded-xl bg-blue-600 text-white font-black border-2 border-blue-500 shadow-md';
-      recalculateCustomPrice();
-    }
-
-    function setCalcHdd(sizeTb, btn) {
-      calcState.hdd = sizeTb;
-      document.querySelectorAll('#calc-hdd-btns button').forEach(b => {
-        b.className = 'calc-hdd-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent';
-      });
-      btn.className = 'calc-hdd-btn py-2 rounded-xl bg-blue-600 text-white font-black border-2 border-blue-500 shadow-md';
-      recalculateCustomPrice();
-    }
-
-    function setCalcStorey(storeys, btn) {
-      calcState.storey = storeys;
-      document.querySelectorAll('#calc-storey-btns button').forEach(b => {
-        b.className = 'calc-storey-btn py-2 rounded-xl bg-slate-100 dark:bg-slate-800 font-bold hover:border-blue-500 border border-transparent';
-      });
-      btn.className = 'calc-storey-btn py-2 rounded-xl bg-blue-600 text-white font-black border-2 border-blue-500 shadow-md';
-      recalculateCustomPrice();
-    }
-
-    function recalculateCustomPrice() {
-      // Base: $890 (NVR + Cabling Setup) + $125 per camera + Storage + Double storey access
-      let base = 790;
-      let camPrice = calcState.cameras * 150;
-      let hddAdd = (calcState.hdd === 4 ? 90 : (calcState.hdd === 8 ? 240 : 0));
-      let storeyAdd = (calcState.storey === 2 ? 150 : 0);
-      let total = base + camPrice + hddAdd + storeyAdd;
-
-      const display = document.getElementById('calc-display-price');
-      if (display) {
-        display.textContent = `$${total.toLocaleString()} inc. GST`;
-      }
-    }
-
-    function bookCalculatedPackage() {
-      const pkgTitle = `Custom ${calcState.cameras}-Camera 4K PoE Package (${calcState.hdd}TB Storage, ${calcState.storey === 1 ? 'Single' : 'Double'} Storey)`;
-      prefillQuote(pkgTitle, 'Home / Residential');
-      const camSelect = document.getElementById('form-cameras');
-      const storeySelect = document.getElementById('form-storeys');
-      if (camSelect) camSelect.value = `${calcState.cameras} Cameras`;
-      if (storeySelect) storeySelect.value = calcState.storey === 1 ? 'Single Storey' : 'Double Storey';
     }
 
     // FAQ Accordion Toggle
