@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CCTV Sunnybank Homepage Wireframe</title>
+  <style>
+    :root {
+      --ink: #202124;
+      --muted: #62676d;
+      --line: #c9cdd2;
+      --panel: #f2f3f5;
+      --soft: #fafafa;
+      --white: #fff;
+      --accent: #30343a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #e9ebee;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+    .page-header {
+      max-width: 1280px;
+      margin: 24px auto 0;
+      padding: 24px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px 14px 0 0;
+    }
+    .page-header h1 { margin: 0 0 6px; font-size: clamp(25px, 4vw, 42px); }
+    .page-header p { margin: 0; color: var(--muted); }
+    .legend {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      background: #f7f7f8;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .workspace {
+      max-width: 1280px;
+      margin: 0 auto 36px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 22px;
+      padding: 24px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 0;
+      border-radius: 0 0 14px 14px;
+    }
+    .wireframe { border: 2px solid var(--accent); background: var(--white); }
+    .block {
+      border-bottom: 1px dashed #9ca1a7;
+      padding: 26px;
+      position: relative;
+    }
+    .block:last-child { border-bottom: 0; }
+    .tag {
+      display: inline-block;
+      margin-bottom: 11px;
+      padding: 4px 8px;
+      border: 1px solid #969ba1;
+      border-radius: 4px;
+      color: var(--muted);
+      background: var(--soft);
+      font: 12px/1.2 monospace;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+      border: 1px solid #aeb3b8;
+      background:
+        linear-gradient(45deg, transparent 49.5%, #d4d7da 49.5%, #d4d7da 50.5%, transparent 50.5%),
+        linear-gradient(-45deg, transparent 49.5%, #d4d7da 49.5%, #d4d7da 50.5%, transparent 50.5%),
+        #f5f6f7;
+      color: var(--muted);
+      text-align: center;
+      padding: 18px;
+    }
+    .nav {
+      display: grid;
+      grid-template-columns: 180px 1fr 150px;
+      gap: 18px;
+      align-items: center;
+    }
+    .logo, .navlinks, .cta, .chip, .card, .step, .review, .faq, .form-field {
+      border: 1px solid #aeb3b8;
+      background: var(--panel);
+    }
+    .logo, .cta { padding: 16px; text-align: center; font-weight: 700; }
+    .navlinks { padding: 16px; text-align: center; color: var(--muted); }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+    .hero h2 { font-size: clamp(30px, 4vw, 54px); line-height: 1.08; margin: 0 0 16px; }
+    .hero p { font-size: 18px; color: var(--muted); margin: 0 0 18px; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .button {
+      display: inline-block;
+      min-width: 150px;
+      padding: 13px 17px;
+      border: 2px solid var(--accent);
+      text-align: center;
+      font-weight: 700;
+    }
+    .button.secondary { border-width: 1px; background: var(--panel); }
+    .chips, .cards, .steps, .reviews, .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .chip { padding: 12px; text-align: center; font-size: 14px; }
+    h3.section-title { font-size: clamp(24px, 3vw, 36px); margin: 0 0 8px; }
+    .section-lead { color: var(--muted); margin: 0 0 20px; max-width: 760px; }
+    .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { padding: 18px; min-height: 145px; }
+    .card h4, .step h4 { margin: 0 0 8px; }
+    .card p, .step p { margin: 0; color: var(--muted); font-size: 14px; }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .checklist { margin: 0; padding-left: 20px; }
+    .checklist li { margin: 7px 0; }
+    .price-card { border: 2px solid #979ca2; background: var(--soft); padding: 20px; }
+    .price-card h4 { margin: 0 0 6px; }
+    .price { font-size: 27px; font-weight: 700; margin-bottom: 12px; }
+    .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .step { padding: 18px; min-height: 130px; }
+    .number {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #90959b;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .case-study {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .review { padding: 18px; min-height: 125px; }
+    .review p { margin: 0 0 10px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .faq { padding: 15px; font-weight: 700; }
+    .quote {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-field { padding: 14px; color: var(--muted); min-height: 48px; }
+    .form-field.full { grid-column: 1 / -1; min-height: 95px; }
+    .footer-grid { grid-template-columns: 1.2fr 1fr 1fr 1fr; }
+    .footer-col { border: 1px solid #aeb3b8; min-height: 135px; padding: 16px; background: var(--panel); }
+    .sidebar { position: sticky; top: 16px; align-self: start; }
+    .note, .sitemap {
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      margin-bottom: 16px;
+    }
+    .note h3, .sitemap h3 { margin-top: 0; }
+    .note p, .sitemap li { font-size: 14px; color: #4f5459; }
+    .sitemap ul { margin: 6px 0 10px; padding-left: 20px; }
+    .sitemap strong { display: block; margin-top: 12px; }
+    code { background: #eceef0; padding: 2px 5px; border-radius: 3px; }
+    @media (max-width: 980px) {
+      .workspace { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .hero, .split, .case-study, .quote { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .chips, .steps, .reviews { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 650px) {
+      .page-header, .workspace { margin-left: 0; margin-right: 0; border-radius: 0; }
+      .workspace { padding: 10px; }
+      .block { padding: 20px 15px; }
+      .nav { grid-template-columns: 1fr auto; }
+      .navlinks { display: none; }
+      .cards, .chips, .steps, .reviews, .faq-grid, .form, .footer-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: auto; }
+    }
+    @media print {
+      body { background: white; }
+      .page-header, .legend, .workspace { max-width: none; margin: 0; border-radius: 0; }
+      .sidebar { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>CCTV Sunnybank Website Wireframe</h1>
+    <p>Responsive homepage structure, conversion flow and pillar-page architecture for cctvsunnybank.com.au</p>
+  </header>
+  <div class="legend">Neutral boxes show layout rather than final colours or imagery. Replace every licence, warranty, response-time, price and review claim with verified business information.</div>
+
+  <main class="workspace">
+    <section class="wireframe" aria-label="Homepage wireframe">
+      <div class="block">
+        <span class="tag">Global header</span>
+        <div class="nav">
+          <div class="logo">CCTV SUNNYBANK<br><small>Logo</small></div>
+          <div class="navlinks">Home · CCTV Installation · Repairs & Upgrades · Pricing · Projects · Advice · About · Contact</div>
+          <div class="cta">Request a Quote</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Above the fold</span>
+        <div class="hero">
+          <div>
+            <h2>CCTV &amp; Security Camera Installation in Sunnybank</h2>
+            <p>Professionally installed camera systems for local homes and businesses, with tidy cabling, clear night footage, mobile viewing and practical after-installation support.</p>
+            <div class="button-row">
+              <div class="button">Request a CCTV Quote</div>
+              <div class="button secondary">View Packages</div>
+            </div>
+          </div>
+          <div class="placeholder">Genuine local installation photo or compact quote form<br><small>Avoid generic stock imagery where real work is available</small></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Trust strip</span>
+        <div class="chips">
+          <div class="chip">QLD security installer licence</div>
+          <div class="chip">Registered cabler</div>
+          <div class="chip">Fully insured</div>
+          <div class="chip">Written workmanship warranty</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Primary services</span>
+        <h3 class="section-title">CCTV Installation Services in Sunnybank</h3>
+        <p class="section-lead">Give visitors a fast route to the service matching their problem.</p>
+        <div class="cards">
+          <div class="card"><h4>Home CCTV</h4><p>Driveways, entrances, side access, yards, garages and detached buildings.</p></div>
+          <div class="card"><h4>Business CCTV</h4><p>Shops, offices, restaurants, warehouses, strata and property managers.</p></div>
+          <div class="card"><h4>Repairs &amp; Upgrades</h4><p>Offline cameras, failed recorders, app access, hard drives and analogue-to-IP upgrades.</p></div>
+          <div class="card"><h4>BYO Installation</h4><p>Mounting and cabling for compatible customer-supplied systems, with a clear warranty boundary.</p></div>
+          <div class="card"><h4>Active Deterrence</h4><p>Lighting, sirens and human or vehicle detection where the site and customer need suit.</p></div>
+          <div class="card"><h4>Remote Viewing</h4><p>Secure phone, tablet and computer access, configured and explained before handover.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Inclusions and proof</span>
+        <div class="split">
+          <div>
+            <h3 class="section-title">What Is Included?</h3>
+            <ul class="checklist">
+              <li>Property and camera-position assessment</li>
+              <li>Written scope and itemised quote</li>
+              <li>Camera mounting and concealed cabling where practical</li>
+              <li>NVR, surveillance hard drive and recording setup</li>
+              <li>Mobile viewing and alert configuration</li>
+              <li>System demonstration and simple handover guide</li>
+              <li>Passwords, recovery details and warranty documentation</li>
+            </ul>
+          </div>
+          <div class="placeholder">Annotated camera-position plan, before and after photos, or sample day/night footage</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Decision guide</span>
+        <h3 class="section-title">Which CCTV System Suits Your Property?</h3>
+        <div class="cards">
+          <div class="card"><h4>Wired PoE</h4><p>Continuous local recording and a stable data connection for permanent installations.</p></div>
+          <div class="card"><h4>Wi-Fi or Battery</h4><p>Useful where cabling is impractical, with power, signal and subscription trade-offs explained.</p></div>
+          <div class="card"><h4>Camera Features</h4><p>Resolution, lens angle, IR or full-colour night vision, detection, deterrence and audio settings.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Pricing</span>
+        <h3 class="section-title">CCTV Packages and Pricing</h3>
+        <p class="section-lead">Show meaningful starting prices and state the exact assumptions behind them.</p>
+        <div class="cards">
+          <div class="price-card"><h4>BYO Installation</h4><div class="price">From $___</div><p>Define camera count, single-storey access, cable allowance and excluded product support.</p></div>
+          <div class="price-card"><h4>Essential Wired Package</h4><div class="price">From $___</div><p>List cameras, recorder, storage, cabling, app setup, warranty and property assumptions.</p></div>
+          <div class="price-card"><h4>Active Deterrence Package</h4><div class="price">From $___</div><p>Explain which cameras receive lights or sirens and how mixed-camera packages reduce cost.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Process</span>
+        <h3 class="section-title">How CCTV Installation Works</h3>
+        <div class="steps">
+          <div class="step"><div class="number">1</div><h4>Tell Us About the Property</h4><p>Property type, camera goals, storeys, access and existing equipment.</p></div>
+          <div class="step"><div class="number">2</div><h4>Assessment and Quote</h4><p>Confirm blind spots, cable routes, storage needs and written inclusions.</p></div>
+          <div class="step"><div class="number">3</div><h4>Professional Installation</h4><p>Mount, cable, configure, test and clean up.</p></div>
+          <div class="step"><div class="number">4</div><h4>Handover and Support</h4><p>Teach the customer, provide credentials and explain support.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Unique local evidence</span>
+        <h3 class="section-title">Recent CCTV Installations Near Sunnybank</h3>
+        <div class="case-study">
+          <div class="placeholder">Original project gallery<br>Wide shot + finished camera + tidy NVR/cabling</div>
+          <div>
+            <h4>Case study format</h4>
+            <p><strong>Property:</strong> De-identified home, shop or office and suburb.</p>
+            <p><strong>Problem:</strong> Blind driveway, poor night detail, ageing DVR or unreliable Wi-Fi cameras.</p>
+            <p><strong>Solution:</strong> Camera count, placement logic, technology and storage selected.</p>
+            <p><strong>Result:</strong> What the customer can now see, receive or retrieve.</p>
+            <p><strong>Completed:</strong> Month and year, without publishing the street address.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Why choose us</span>
+        <div class="split">
+          <div>
+            <h3 class="section-title">Why Choose CCTV Sunnybank?</h3>
+            <ul class="checklist">
+              <li>Show the named installer and real experience</li>
+              <li>Publish verified licence and cabler details</li>
+              <li>Explain workmanship and equipment warranties separately</li>
+              <li>State who provides support after installation</li>
+              <li>Show clean cabling and recorder installations</li>
+              <li>Use plain language and practical customer training</li>
+            </ul>
+          </div>
+          <div class="placeholder">Installer portrait, vehicle or team photo<br><small>Link to detailed About, Licences and Warranty page</small></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Reviews</span>
+        <h3 class="section-title">What Local Customers Say</h3>
+        <div class="reviews">
+          <div class="review"><p>Short, relevant CCTV review excerpt.</p><strong>Name · suburb · source</strong></div>
+          <div class="review"><p>Review mentioning tidy installation or explanation.</p><strong>Name · suburb · source</strong></div>
+          <div class="review"><p>Review mentioning support after installation.</p><strong>Name · suburb · source</strong></div>
+          <div class="review"><p>Review mentioning a business or upgrade job.</p><strong>Name · suburb · source</strong></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Local coverage</span>
+        <h3 class="section-title">CCTV Installation Around Sunnybank</h3>
+        <p class="section-lead">Use a restrained local grid: Sunnybank, Sunnybank Hills, Robertson, MacGregor, Runcorn, Eight Mile Plains, Coopers Plains, Calamvale, Stretton, Algester and Acacia Ridge. Build separate suburb pages only when each has unique local projects and useful content.</p>
+        <div class="placeholder" style="min-height:120px">Service-area map or simple suburb grid</div>
+      </div>
+
+      <div class="block">
+        <span class="tag">FAQ</span>
+        <h3 class="section-title">CCTV Installation FAQs</h3>
+        <div class="faq-grid">
+          <div class="faq">How much does CCTV installation cost?</div>
+          <div class="faq">How many cameras does my property need?</div>
+          <div class="faq">Is wired CCTV better than wireless?</div>
+          <div class="faq">Can I view the cameras on my phone?</div>
+          <div class="faq">Does CCTV record when the internet is down?</div>
+          <div class="faq">How long is footage stored?</div>
+          <div class="faq">Can you install cameras I already own?</div>
+          <div class="faq">Can you repair or upgrade an old system?</div>
+          <div class="faq">Do CCTV systems require a subscription?</div>
+          <div class="faq">What happens during a power outage?</div>
+          <div class="faq">Can cameras record colour at night?</div>
+          <div class="faq">Can CCTV legally record audio?</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Final conversion block</span>
+        <div class="quote">
+          <div>
+            <h3 class="section-title">Request a CCTV Quote</h3>
+            <p class="section-lead">Ask only for details that improve the first response. Keep the form usable on mobile and show what happens after submission.</p>
+            <ul class="checklist">
+              <li>No obligation</li>
+              <li>Written scope</li>
+              <li>Clear product and workmanship warranty terms</li>
+              <li>Preferred contact method and time</li>
+            </ul>
+          </div>
+          <div class="form">
+            <div class="form-field">Name</div>
+            <div class="form-field">Suburb / postcode</div>
+            <div class="form-field">Email</div>
+            <div class="form-field">Mobile</div>
+            <div class="form-field">Home / business / rental</div>
+            <div class="form-field">New / repair / upgrade / BYO</div>
+            <div class="form-field">Approximate camera count</div>
+            <div class="form-field">Single or double storey</div>
+            <div class="form-field full">What would you like the cameras to cover?</div>
+            <div class="button" style="grid-column:1/-1">Send Quote Request</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="tag">Footer</span>
+        <div class="footer-grid">
+          <div class="footer-col"><strong>CCTV Sunnybank</strong><p>One clear business summary and service area.</p></div>
+          <div class="footer-col"><strong>Services</strong><p>Installation<br>Repairs<br>Upgrades<br>BYO</p></div>
+          <div class="footer-col"><strong>Information</strong><p>Pricing<br>Projects<br>Advice<br>Licences</p></div>
+          <div class="footer-col"><strong>Business</strong><p>About<br>Contact<br>Privacy<br>Terms</p></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="note">
+        <h3>Recommended SEO focus</h3>
+        <p><strong>Homepage intent:</strong> CCTV and security camera installation in Sunnybank.</p>
+        <p><strong>H1:</strong> CCTV &amp; Security Camera Installation in Sunnybank</p>
+        <p><strong>Primary CTA:</strong> Request a CCTV Quote</p>
+        <p>Do not create a second page targeting the same primary Sunnybank installation query.</p>
+      </div>
+
+      <div class="sitemap">
+        <h3>Pillar-page architecture</h3>
+        <strong>1. CCTV Installation</strong>
+        <ul>
+          <li>Home CCTV</li>
+          <li>Business CCTV</li>
+          <li>BYO Installation</li>
+          <li>New Builds and Renovations</li>
+        </ul>
+        <strong>2. Repairs and Upgrades</strong>
+        <ul>
+          <li>CCTV Repairs</li>
+          <li>Analogue to IP Upgrades</li>
+          <li>NVR and Hard Drive Problems</li>
+          <li>Remote Viewing and App Problems</li>
+        </ul>
+        <strong>3. Systems Guide</strong>
+        <ul>
+          <li>Wired vs Wireless</li>
+          <li>NVR vs DVR</li>
+          <li>Camera Resolution</li>
+          <li>Night Vision</li>
+          <li>Active Deterrence</li>
+          <li>Storage and Cybersecurity</li>
+        </ul>
+        <strong>4. CCTV Pricing</strong>
+        <ul>
+          <li>Packages</li>
+          <li>Installation Cost Factors</li>
+          <li>Inclusions and Warranty</li>
+        </ul>
+        <strong>5. Commercial CCTV</strong>
+        <ul>
+          <li>Retail and Hospitality</li>
+          <li>Offices</li>
+          <li>Warehouses</li>
+          <li>Property Managers and Strata</li>
+        </ul>
+        <strong>6. Service Areas</strong>
+        <ul>
+          <li>Sunnybank Hills</li>
+          <li>Robertson</li>
+          <li>MacGregor</li>
+          <li>Runcorn</li>
+          <li>Eight Mile Plains</li>
+          <li>Calamvale and nearby suburbs</li>
+        </ul>
+        <strong>Trust and conversion pages</strong>
+        <ul>
+          <li>Projects and Case Studies</li>
+          <li>About the Installer</li>
+          <li>Licences, Insurance and Warranty</li>
+          <li>Reviews</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <h3>Launch checks</h3>
+        <p>Homepage returns HTTP 200, HTTPS works, mobile layout is tested, one canonical URL is used, XML sitemap is submitted, quote form is tested, all trust claims are verified and every project image is owned or licensed.</p>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>
