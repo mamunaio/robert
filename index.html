@@ -327,7 +327,7 @@
               </div>
 
               <!-- Camera View Screen (Dynamic Switcher) -->
-              <div id="cctv-preview-screen" class="aspect-[16/10] relative overflow-hidden flex flex-col justify-between p-4 transition-all duration-500 bg-cover bg-center" style="background-image: radial-gradient(circle at 50% 40%, #1E293B 0%, #0F172A 100%);">
+              <div id="cctv-preview-screen" class="aspect-[16/10] relative overflow-hidden flex flex-col justify-between p-4 transition-all duration-500 bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.35)), url('cctv-ch1-day.jpg');">
                 
                 <!-- Surveillance Scanline -->
                 <div class="absolute inset-0 cctv-scanline"></div>
@@ -348,10 +348,10 @@
 
                 <!-- Bounding Box Target Reticle -->
                 <div class="relative z-10 my-auto text-center pointer-events-none">
-                  <div id="cctv-target-box" class="w-36 h-24 border-2 border-dashed border-cyan-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-cyan-400/5 transition-all">
+                  <div id="cctv-target-box" class="w-40 sm:w-48 h-28 sm:h-32 border-2 border-dashed border-cyan-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-cyan-400/10 backdrop-blur-[1px] transition-all">
                     <div class="flex justify-between text-[8px] font-mono font-bold text-cyan-300">
                       <span>98.4% CONF</span>
-                      <span>TARGET #01</span>
+                      <span>TARGET: VEHICLE</span>
                     </div>
                     <div class="text-[9px] font-mono font-black text-cyan-200 uppercase bg-black/70 px-1.5 py-0.5 rounded mx-auto">
                       Front Driveway Zone
@@ -1893,10 +1893,74 @@
     setInterval(updateCctvClock, 1000);
     updateCctvClock();
 
-    // Multi-Camera Channel Switcher
+    // Multi-Camera Live Surveillance Feeds
     let currentVisionMode = 'day';
+    let currentChannel = 1;
+
+    const cameraFeeds = {
+      1: {
+        day: 'cctv-ch1-day.jpg',
+        night: 'cctv-ch1-night.jpg',
+        boxStyle: 'w-40 sm:w-48 h-28 sm:h-32 border-2 border-dashed border-cyan-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-cyan-400/10 backdrop-blur-[1px] transition-all',
+        boxConf: '98.4% CONF',
+        boxTarget: 'TARGET: VEHICLE',
+        boxZone: 'Front Driveway Zone'
+      },
+      2: {
+        day: 'cctv-ch2-porch.jpg',
+        night: 'cctv-ch2-porch.jpg',
+        boxStyle: 'w-32 sm:w-36 h-28 sm:h-32 border-2 border-dashed border-emerald-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-emerald-400/10 backdrop-blur-[1px] transition-all',
+        boxConf: '99.1% CONF',
+        boxTarget: 'PACKAGE DROP',
+        boxZone: 'Porch Parcel Area'
+      },
+      3: {
+        day: 'cctv-ch3-side.jpg',
+        night: 'cctv-ch3-side.jpg',
+        boxStyle: 'w-36 sm:w-44 h-32 sm:h-36 border-2 border-dashed border-amber-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-amber-400/10 backdrop-blur-[1px] transition-all',
+        boxConf: 'PERIMETER OK',
+        boxTarget: 'FENCE LINE',
+        boxZone: 'Side Passageway'
+      },
+      4: {
+        day: 'cctv-ch4-patio.jpg',
+        night: 'cctv-ch4-patio.jpg',
+        boxStyle: 'w-44 sm:w-52 h-28 sm:h-32 border-2 border-dashed border-purple-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-purple-400/10 backdrop-blur-[1px] transition-all',
+        boxConf: 'PATIO CLEAR',
+        boxTarget: 'OUTDOOR ZONE',
+        boxZone: 'Rear Entertaining'
+      }
+    };
+
+    function updateCameraDisplay() {
+      const screen = document.getElementById('cctv-preview-screen');
+      const targetBox = document.getElementById('cctv-target-box');
+      const feed = cameraFeeds[currentChannel] || cameraFeeds[1];
+      const imgSrc = currentVisionMode === 'day' ? feed.day : feed.night;
+
+      if (screen) {
+        const overlay = currentVisionMode === 'day' 
+          ? 'linear-gradient(rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.35))'
+          : 'linear-gradient(rgba(2, 6, 23, 0.15), rgba(2, 6, 23, 0.45))';
+        screen.style.backgroundImage = `${overlay}, url('${imgSrc}')`;
+        screen.style.backgroundSize = 'cover';
+        screen.style.backgroundPosition = 'center';
+      }
+
+      if (targetBox) {
+        targetBox.className = feed.boxStyle;
+        const spans = targetBox.querySelectorAll('span');
+        if (spans.length >= 2) {
+          spans[0].textContent = feed.boxConf;
+          spans[1].textContent = feed.boxTarget;
+        }
+        const zoneDiv = targetBox.querySelector('div:last-child');
+        if (zoneDiv) zoneDiv.textContent = feed.boxZone;
+      }
+    }
 
     function switchCamera(channelNum, title, detectionText) {
+      currentChannel = channelNum;
       document.getElementById('cam-active-title').textContent = title;
       document.getElementById('ai-detection-label').textContent = detectionText;
       
@@ -1911,46 +1975,28 @@
         }
       }
 
-      const screen = document.getElementById('cctv-preview-screen');
-      const targetBox = document.getElementById('cctv-target-box');
-
-      // Unique camera backgrounds & reticles
-      if (channelNum === 1) {
-        screen.style.backgroundImage = currentVisionMode === 'day' ? 'radial-gradient(circle at 50% 40%, #1E293B 0%, #0F172A 100%)' : 'radial-gradient(circle at 50% 40%, #0F172A 0%, #020617 100%)';
-        targetBox.className = 'w-36 h-24 border-2 border-dashed border-cyan-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-cyan-400/5 transition-all';
-      } else if (channelNum === 2) {
-        screen.style.backgroundImage = currentVisionMode === 'day' ? 'radial-gradient(circle at 40% 50%, #334155 0%, #0F172A 100%)' : 'radial-gradient(circle at 40% 50%, #1E1B4B 0%, #020617 100%)';
-        targetBox.className = 'w-24 h-24 border-2 border-dashed border-emerald-400 rounded-full mx-auto relative flex flex-col justify-between p-1 bg-emerald-400/5 transition-all';
-      } else if (channelNum === 3) {
-        screen.style.backgroundImage = currentVisionMode === 'day' ? 'radial-gradient(circle at 60% 60%, #1E293B 0%, #020617 100%)' : 'radial-gradient(circle at 60% 60%, #090D16 0%, #000000 100%)';
-        targetBox.className = 'w-44 h-16 border-2 border-dashed border-amber-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-amber-400/5 transition-all';
-      } else {
-        screen.style.backgroundImage = currentVisionMode === 'day' ? 'radial-gradient(circle at 50% 50%, #292524 0%, #0F172A 100%)' : 'radial-gradient(circle at 50% 50%, #0C0A09 0%, #020617 100%)';
-        targetBox.className = 'w-32 h-20 border-2 border-dashed border-purple-400 rounded-lg mx-auto relative flex flex-col justify-between p-1 bg-purple-400/5 transition-all';
-      }
+      updateCameraDisplay();
     }
 
-    // Day / Night Camera Simulation Logic
     function setCctvVision(mode) {
       currentVisionMode = mode;
-      const screen = document.getElementById('cctv-preview-screen');
       const indicator = document.getElementById('vision-mode-indicator');
       const btnDay = document.getElementById('btn-day');
       const btnNight = document.getElementById('btn-night');
 
       if (mode === 'day') {
-        screen.style.backgroundImage = 'radial-gradient(circle at 50% 40%, #1E293B 0%, #0F172A 100%)';
         indicator.textContent = 'MODE: DAY 4K HDR';
         indicator.className = 'text-amber-400 font-bold';
         btnDay.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white transition-all';
         btnNight.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition-all';
       } else {
-        screen.style.backgroundImage = 'radial-gradient(circle at 50% 40%, #0F172A 0%, #020617 100%)';
         indicator.textContent = 'MODE: COLORVU NIGHT (F1.0 LOW LIGHT)';
         indicator.className = 'text-cyan-400 font-bold';
         btnNight.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-600 text-white transition-all';
         btnDay.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition-all';
       }
+
+      updateCameraDisplay();
     }
 
     // FAQ Accordion Toggle
